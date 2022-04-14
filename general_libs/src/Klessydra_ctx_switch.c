@@ -41,10 +41,12 @@ void store_ctx_c(void)
   		"sw x31, 116(sp);"
   		"csrr x31, mepc;" // has the return address from the trap routine
   		"sw x31, 120(sp);"
-  		"csrr x31, mstatus;" // has the interrupt enable bit that determines whether we servie WFI instructions or not
-        "li x30, 0b10001000;" // create a mask to manitpulate the MPIE and MIE bits in the MSTATUS
-        "xor x31, x31, x30;" // the xor will flip the bits that are 1 to 0 and the bits are 0 to 1, the other bitd are not needed
+  		"csrr x31, mcause;" // the mcause is used by the mret instruction to determine whether we return to MEPC (normal instr) or MEPC+4 (wfi instr) 
   		"sw x31, 124(sp);"
+  		//"csrr x31, mstatus;" // has the interrupt enable bit that determines whether we servie WFI instructions or not
+        //"li x30, 0b10001000;" // create a mask to manitpulate the MPIE and MIE bits in the MSTATUS
+        "xor x31, x31, x30;" // the xor will flip the bits that are 1 to 0 and the bits are 0 to 1, the other bitd are not needed
+  		"sw x31, 128(sp);"
   	);
 
 	__asm__(
@@ -76,8 +78,10 @@ void load_ctx_c(void)
   	);
 
 	__asm__(
+		//"lw x31, 128(sp);"
+  		//"csrrw x0, mstatus, x31;"
 		"lw x31, 124(sp);"
-  		"csrrw x0, mstatus, x31;"
+  		"csrrw x0, mcause, x31;"
 		"lw x31, 120(sp);"
   		"csrrw x0, mepc, x31;"
   		"lw x3,  4(sp);"
