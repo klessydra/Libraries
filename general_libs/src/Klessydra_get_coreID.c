@@ -6,7 +6,7 @@ int Klessydra_get_coreID()
 	int mhartid_value;
         int harcID;
 	__asm__(
-		"CSRR %0, 0xF10;" 
+		"CSRR %0, 0xF14;" 
 		:"=r"(mhartid_value)
 		:
 		:

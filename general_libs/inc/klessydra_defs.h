@@ -30,7 +30,7 @@
 #define k_mestatus	0x7B8
 #define k_mcpuid  	0xF00
 #define k_mimpid  	0xF01
-#define k_mhartid 	0xF10
+#define k_mhartid 	0xF14
 #define k_mirq		0xFC0
 #define k_mip		0x304
 #define k_mtvec		0x305

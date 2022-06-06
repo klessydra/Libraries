@@ -45,7 +45,7 @@ int* pSCP_copyin_src2 = &vSCP_copyin_src2;
         unsigned int hartID = 0; \
 	unsigned int mhartid_value; \
         __asm__(\
-		"CSRR %[mhartid_value], 0xf10;" \
+		"CSRR %[mhartid_value], 0xf14;" \
 		:[mhartid_value] "=r" (mhartid_value), [hartID] "=r" (hartID) \
                 : \
                 : \
@@ -56,7 +56,7 @@ int* pSCP_copyin_src2 = &vSCP_copyin_src2;
 #define MKlessydra_get_mhartid() \
 	int mhartid_value; \
 	__asm__( \
-		"CSRR %0, 0xF10;" \
+		"CSRR %0, 0xF14;" \
 		:"=r"(mhartid_value) \
 	); \
 	return mhartid_value; \
