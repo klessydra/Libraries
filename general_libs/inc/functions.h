@@ -6,13 +6,24 @@
 	#define THREAD_POOL_SIZE 3
 #endif
 
-int barrier_completed[THREAD_POOL_SIZE]; 
-int arrived_at_barrier[THREAD_POOL_SIZE];
-int sync_barrier_register[THREAD_POOL_SIZE];
-int key;  // key to be used for atomic operations
-int *ptr_key;
-int barrier_thread_registration_count;
-int arrived_at_barrier_count;  // Counter for the threads that arrived at the barrier
+#ifdef __cplusplus
+inline int barrier_completed[THREAD_POOL_SIZE]; 
+inline int arrived_at_barrier[THREAD_POOL_SIZE];
+inline int sync_barrier_register[THREAD_POOL_SIZE];
+inline int key;  // key to be used for atomic operations
+inline int *ptr_key;
+inline int barrier_thread_registration_count;
+inline int arrived_at_barrier_count;  // Counter for the threads that arrived at the barrier
+#else
+ int barrier_completed[THREAD_POOL_SIZE]; 
+ int arrived_at_barrier[THREAD_POOL_SIZE];
+ int sync_barrier_register[THREAD_POOL_SIZE];
+ int key;  // key to be used for atomic operations
+ int *ptr_key;
+ int barrier_thread_registration_count;
+ int arrived_at_barrier_count;  // Counter for the threads that arrived at the barrier
+#endif
+
 
 //#ifndef __KLESSYDRACFUNCTIONS_H__
 //#define __KLESSYDRACFUNCTIONS_H__
@@ -30,8 +41,6 @@ void minstret_reset(void);
 void klessydra_lock_acquire(int *lock);
 
 void klessydra_lock_release(int *lock);
-
-int klessydra_lock_set(int *lock);
 
 void load_mem(int data_send, int store_addr);
 
