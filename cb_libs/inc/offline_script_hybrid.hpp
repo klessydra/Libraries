@@ -22,8 +22,8 @@ extern Linear_UCB_Hybrid linucb_hybrid_policy_object;	// Hybrid algorithm
 
 // Configuration choice:
 void init();
-void offline_mode_hr();
+//void offline_mode_hr();
 
 //Update:
-void update_hr(int chosen_c,float rew);
+//void update_hr(int chosen_c,float rew);
 #endif
