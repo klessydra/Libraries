@@ -2,5 +2,5 @@
 #define D 4
 #define K 12
 #define SINGLE_THREAD 0
-#define PERFORMANCE_COUNTER 1
+#define PERFORMANCE_COUNTER 0
 
