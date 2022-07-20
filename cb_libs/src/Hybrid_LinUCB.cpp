@@ -38,8 +38,9 @@ fixed_point LinUCB_hybrid_element::calc_UCB(matrix<D,1> xt, matrix<K,K>A_node_in
 	theta = mult<D,D,D,1>(A_inv,sub<D,1>(b,mult<D,K,K,1>(B,beta_hat,core)),core);		// Calculation of Theta starting from A_inv, b, B and beta hat
 
 	// Standard deviation s														
+	fixed_point due=(float)2.0;
 	fixed_point s1 =   mult<1,K,K,1>(z_reshaped_transpose,mult<K,K,K,1>(A_node_inv,z_reshaped,core),core).value[0][0];
-	fixed_point s2 = 2.0*mult<1,K,K,1>(z_reshaped_transpose,mult<K,K,K,1>(A_node_inv,mult<K,D,D,1>(B_transpose,mult<D,D,D,1>(A_inv,xt,core),core),core),core).value[0][0];
+	fixed_point s2 = due*mult<1,K,K,1>(z_reshaped_transpose,mult<K,K,K,1>(A_node_inv,mult<K,D,D,1>(B_transpose,mult<D,D,D,1>(A_inv,xt,core),core),core),core).value[0][0];
 	fixed_point s3 =   mult<1,D,D,1>(xt_transpose,mult<D,D,D,1>(A_inv,xt,core),core).value[0][0];
 	fixed_point s4 =   mult<1,D,D,1>(xt_transpose,mult<D,D,D,1>(A_inv, mult<D,K,K,1>(B,mult<K,K,K,1>(A_node_inv,mult<K,D,D,1>(B_transpose,mult<D,D,D,1>(A_inv,xt,core),core),core),core),core),core).value[0][0];
 	fixed_point s = s1 - s2 + s3 + s4;
