@@ -17,7 +17,6 @@
 #include <math.h>
 #include "params_hybrid.hpp"
 #include "matrix.hpp"
-
 #ifndef TIME
 	#define TIME 10
 #endif

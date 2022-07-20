@@ -24,7 +24,6 @@ Version:     1.1
 #define _Disjoint_hpp_
 #include "matrix.hpp"
 #include "params.hpp"
-
 #ifndef TIME
 	#define TIME 10
 #endif
