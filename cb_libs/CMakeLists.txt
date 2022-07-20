@@ -10,8 +10,8 @@ set(HEADERS
     inc/matrix.hpp
     inc/params.hpp
     inc/params_hybrid.hpp
-    inc/offline_script.hpp
     inc/info.hpp
+    inc/values.hpp
     )
 
 include_directories(inc/)
