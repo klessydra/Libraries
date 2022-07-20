@@ -1,13 +1,17 @@
+//██╗░░██╗██╗░░░██╗██████╗░██████╗░██╗██████╗░
+//██║░░██║╚██╗░██╔╝██╔══██╗██╔══██╗██║██╔══██╗
+//███████║░╚████╔╝░██████╦╝██████╔╝██║██║░░██║
+//██╔══██║░░╚██╔╝░░██╔══██╗██╔══██╗██║██║░░██║
+//██║░░██║░░░██║░░░██████╦╝██║░░██║██║██████╔╝
+//╚═╝░░╚═╝░░░╚═╝░░░╚═════╝░╚═╝░░╚═╝╚═╝╚═════╝░
+//
+// ██╗░░░░░██╗███╗░░██╗███████╗░█████╗░██████╗░  ██╗░░░██╗░█████╗░██████╗░
+// ██║░░░░░██║████╗░██║██╔════╝██╔══██╗██╔══██╗  ██║░░░██║██╔══██╗██╔══██╗
+// ██║░░░░░██║██╔██╗██║█████╗░░███████║██████╔╝  ██║░░░██║██║░░╚═╝██████╦╝
+// ██║░░░░░██║██║╚████║██╔══╝░░██╔══██║██╔══██╗  ██║░░░██║██║░░██╗██╔══██╗
+// ███████╗██║██║░╚███║███████╗██║░░██║██║░░██║  ╚██████╔╝╚█████╔╝██████╦╝
+// ╚══════╝╚═╝╚═╝░░╚══╝╚══════╝╚═╝░░╚═╝╚═╝░░╚═╝  ░╚═════╝░░╚════╝░╚═════╝░
 
-/*-------------------------------------------------------------------------------------------------------
-Script:      Disjoint_LinUCB.cpp
-Description: Definition of LinUCB_hybrid_element & Linear_UCB_Disjoint classes. These classes
-			 fully define the Disjoint Linear UCB algorithm. All the methods used are described.
-	     	 For each action (or configuration) there is a LinUCB_hybrid_element.
-Author:      Marco Angioli
-Data:        09/02/2022
-Version:     1.1
--------------------------------------------------------------------------------------------------------*/
 #ifndef _Hybrid_hpp_
 #define _Hybrid_hpp_
 #include <math.h>
@@ -19,6 +23,7 @@ Version:     1.1
 #endif
 
 extern fixed_point computed_arm_ucb[KA];	// UCB computed for every configuration
+extern int cycle_inv, cycle_other;
 
 // Lin UCB CLASS DEFINITION:
 class LinUCB_hybrid_element
@@ -64,10 +69,8 @@ class LinUCB_hybrid_element
     		
   
     		//---------- Methods: -------------- 
-    		//void init_arm_features(int, matrix<1,AF>);				// Arm features initialization
 			fixed_point calc_UCB(matrix<D,1>, matrix<K,K>, matrix<K,1>, int); 	// UCB computation function
 	    	void reward_update(float, matrix<D,1>, matrix<K,1>);	// Update function given the reward		
-			//void display_lin();										// Element's attributes display
 };
 
 
@@ -109,7 +112,6 @@ class Linear_UCB_Hybrid : public LinUCB_hybrid_element
 			
 		 	//---------- Methods: -------------- 
 			int select_arm(matrix<D,1>,matrix<K,K>, matrix<K,1>);										// Best configuration selection by UCB computing for each element
-			//void print_all();
 			void update_shared_features_matrices_phase1(matrix<D,K> chosen_arm_B, matrix<D,D> chosen_arm_A, matrix<D,1> chosen_arm_b); // Phase 1: Local rewards update
 			void update_shared_features_matrices_phase2(matrix<K,1> z_array, float reward, matrix<D,K> chosen_arm_B, matrix<D,D> chosen_arm_A, matrix<D,1> chosen_arm_b);        // Phase 2: update using reward
 			void init_arm();
