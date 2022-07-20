@@ -17,8 +17,8 @@ Description: Definition of LinUCB_disjoint_element & Linear_UCB_Disjoint classes
 			 			 fully define the Disjoint Linear UCB algorithm. All the methods used are described.
 	     	 		 For each action (or configuration) there is a LinUCB_disjoint_element.
 Author:      Marco Angioli
-Data:        09/02/2022
-Version:     1.1
+Data:        07/2022
+Version:     3.0
 -------------------------------------------------------------------------------------------------------*/
 
 #include "Disjoint_LinUCB.hpp"
