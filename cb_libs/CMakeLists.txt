@@ -2,6 +2,7 @@ set(SOURCES
     src/Disjoint_LinUCB.cpp
     src/Hybrid_LinUCB.cpp
     src/values.cpp
+    src/values_h.cpp
     )
 
 set(HEADERS
