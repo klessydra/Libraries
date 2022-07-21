@@ -12,6 +12,7 @@ set(HEADERS
     inc/params_hybrid.hpp
     inc/info.hpp
     inc/values.hpp
+    inc/values_h.hpp
     )
 
 include_directories(inc/)
