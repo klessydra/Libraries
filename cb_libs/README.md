@@ -67,6 +67,7 @@ For alogirhtm Hybrid you can run:
 To simulate the online functioning of CB algorithms, it's possible to run some
 bash script contained in sw/apps/klessydra_tests/klessydra_contextual_bandits/simulation_scripts
 These scripts simulate real online operation and have to be copied in sw/build.
+Remember to give the execution permission to bash files (chmod +x file_name).
 Then you can run ```./exec.sh``` and ```./exec_hybrid.sh``` to simulate Disjoint and Hybrid algorithms
 respectively. At each iteration:
 - an operation is requested,
@@ -80,6 +81,7 @@ to the following process:
 - the memory is saved on ModelSim\*\*
 - some script are executed to elaborate memory and produce a file values.cpp
   that is included in the main script and initializes every model element.
+---------------------------------------------------------------------------------
 
 \* NOTE 1: increasing the model parameters could require a bigger memory space.
 In order to increase program memory and/or datamemory you have to modify the following files:
@@ -96,10 +98,11 @@ pulpino-klessydra/sw/apps/CMakeLists.txt searching for the "vsimc" options and
 change them as follows:
 
 	OLD ->
-	     ```COMMAND tcsh -c "${SETENV} ${VSIM}  -c -64 -do 'source tcl_files/$<TARGET_PROPERTY:${NAME}.elf,TB>\\; run -a\\;' >vsim.log" ```
+	     COMMAND tcsh -c "${SETENV} ${VSIM}  -c -64 -do 'source tcl_files/$<TARGET_PROPERTY:${NAME}.elf,TB>\\; run -a\\;' >vsim.log" 
 	
 	NEW ->
-	 	 ```COMMAND tcsh -c "${SETENV} ${VSIM}  -c -64 -do 'source tcl_files/$<TARGET_PROPERTY:${NAME}.elf,TB>\\; run -a\\; mem save -o /home/USERNAME/pulpino-klessydra/sw/build/memory2.mem -f mti -data decimal -addr hex /tb/top_i/core_region_i/mem_gen/data_mem/sp_ram_i/mem \\; exit\\;' >vsim.log" ```
+	 	 COMMAND tcsh -c "${SETENV} ${VSIM}  -c -64 -do 'source tcl_files/$<TARGET_PROPERTY:${NAME}.elf,TB>\\; run -a\\; mem save -o /home/USERNAME/pulpino-klessydra/sw/build/memory2.mem -f mti -data decimal -addr hex /tb/top_i/core_region_i/mem_gen/data_mem/sp_ram_i/mem \\; exit\\;' >vsim.log"
+
 
 
 
