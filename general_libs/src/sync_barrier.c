@@ -92,7 +92,7 @@ void sync_barrier()
 #if USE_KLESSYDRA_M == 1
 
 void sync_barrier()
-{	
+{
     int my_hart, i;
 	int *ptr_key = &key_barr;
     my_hart = Klessydra_get_coreID();
