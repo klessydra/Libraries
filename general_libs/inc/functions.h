@@ -29,8 +29,6 @@ void klessydra_lock_acquire(int *lock);
 
 void klessydra_lock_release(int *lock);
 
-int klessydra_lock_set(int *lock);
-
 void load_mem(int data_send, int store_addr);
 
 int send_multi_sw_irq(int targetharts);
