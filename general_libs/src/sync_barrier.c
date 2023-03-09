@@ -3,35 +3,25 @@
 
 int key_barr = 0;
 
+int barrier_completed[THREAD_POOL_SIZE]; 
+int arrived_at_barrier[THREAD_POOL_SIZE];
+int sync_barrier_register[THREAD_POOL_SIZE];
+int key;  // key to be used for atomic operations
+int *ptr_key;
+
 void sync_barrier_reset()
 {
-    int i;
-	int key = 1;
-	static int section = 0;
-	int* ptr_section = &section;
-	asm volatile
-	(
-		"csrrw zero, mstatus, 8;" 
-		"amoswap.w.aq %[key], %[key], (%[ptr_section]);"
-		:
-		:[key] "r" (key), [ptr_section] "r" (ptr_section)
-		:
-	);
-	if (section == 0)
-	{
-	    for (i=0;i<THREAD_POOL_SIZE; i++) 
-    	{
-    		sync_barrier_register[i] = 0;
-    	}
-	}
+	int my_hart;
+	my_hart = Klessydra_get_coreID();
+	sync_barrier_register[my_hart] = 0;
 }
 
 void sync_barrier_thread_registration()
 {
-   int my_hart;
-   my_hart = Klessydra_get_coreID();
-   arrived_at_barrier[my_hart] =  0;	
-   sync_barrier_register[my_hart] = 1;
+	int my_hart;
+	my_hart = Klessydra_get_coreID();
+	arrived_at_barrier[my_hart] =  0;	
+	sync_barrier_register[my_hart] = 1;
 }
 
 
