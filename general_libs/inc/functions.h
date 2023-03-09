@@ -6,13 +6,11 @@
 	#define THREAD_POOL_SIZE 3
 #endif
 
-int barrier_completed[THREAD_POOL_SIZE]; 
-int arrived_at_barrier[THREAD_POOL_SIZE];
-int sync_barrier_register[THREAD_POOL_SIZE];
-int key;  // key to be used for atomic operations
-int *ptr_key;
-int barrier_thread_registration_count;
-int arrived_at_barrier_count;  // Counter for the threads that arrived at the barrier
+extern int barrier_completed[THREAD_POOL_SIZE]; 
+extern int arrived_at_barrier[THREAD_POOL_SIZE];
+extern int sync_barrier_register[THREAD_POOL_SIZE];
+extern int key;  // key to be used for atomic operations
+extern int *ptr_key;
 
 //#ifndef __KLESSYDRACFUNCTIONS_H__
 //#define __KLESSYDRACFUNCTIONS_H__
