@@ -622,7 +622,131 @@ __attribute__ ((always_inline)) inline int kvcp_v2(void* rd, void* rs1, int size
 	
 	return 1;
 }
+__attribute__ ((always_inline)) inline int kvdiv(void* rd, void* rs1, void* rs2)
+{
+	__asm__(
+		"kvdiv %[rd], %[rs1], %[rs2];"
+		://no output register
+		:[rd] "r" (rd), [rs1] "r" (rs1), [rs2] "r" (rs2)
+		:/*no clobbered registers*/
+	);
+	
+	return sizeof(rd);
+}
 
+__attribute__ ((always_inline)) inline int kvdiv_v2(void* rd, void* rs1, void* rs2, int size)
+{
+	__asm__(
+        "csrw 0xBF0, %[size];"
+		"kvdiv %[rd], %[rs1], %[rs2];"
+		://no output register
+		:[size] "r" (size), [rd] "r" (rd), [rs1] "r" (rs1), [rs2] "r" (rs2)
+		:/*no clobbered registers*/
+	);
+	
+	return 1;
+}
+
+__attribute__ ((always_inline)) inline int ksvdivrf(void* rd, void* rs1, void* rs2)
+{
+	__asm__(
+		"ksvdivrf %[rd], %[rs1], %[rs2];"
+		://no output register
+		:[rd] "r" (rd), [rs1] "r" (rs1), [rs2] "r" (rs2)
+		:/*no clobbered registers*/
+	);
+	
+	return sizeof(rd);
+}
+
+__attribute__ ((always_inline)) inline  int ksvdivsc(void* rd, void* rs1, void* rs2)
+{
+	__asm__(
+		"ksvdivsc %[rd], %[rs1], %[rs2];"
+		://no output register
+		:[rd] "r" (rd), [rs1] "r" (rs1), [rs2] "r" (rs2)
+		:/*no clobbered registers*/
+	);
+	
+	return sizeof(rd);
+}
+
+
+
+__attribute__ ((always_inline)) inline int kvrem(void* rd, void* rs1, void* rs2)
+{
+	__asm__(
+		"kvrem %[rd], %[rs1], %[rs2];"
+		://no output register
+		:[rd] "r" (rd), [rs1] "r" (rs1), [rs2] "r" (rs2)
+		:/*no clobbered registers*/
+	);
+	
+	return sizeof(rd);
+}
+
+__attribute__ ((always_inline)) inline int kvrem_v2(void* rd, void* rs1, void* rs2, int size)
+{
+	__asm__(
+        "csrw 0xBF0, %[size];"
+		"kvrem %[rd], %[rs1], %[rs2];"
+		://no output register
+		:[size] "r" (size), [rd] "r" (rd), [rs1] "r" (rs1), [rs2] "r" (rs2)
+		:/*no clobbered registers*/
+	);
+	
+	return 1;
+}
+
+__attribute__ ((always_inline)) inline int ksvremrf(void* rd, void* rs1, void* rs2)
+{
+	__asm__(
+		"ksvremrf %[rd], %[rs1], %[rs2];"
+		://no output register
+		:[rd] "r" (rd), [rs1] "r" (rs1), [rs2] "r" (rs2)
+		:/*no clobbered registers*/
+	);
+	
+	return sizeof(rd);
+}
+
+__attribute__ ((always_inline)) inline int ksvremrf_v2(void* rd, void* rs1, void* rs2, int size)
+{
+	__asm__(
+        "csrw 0xBF0, %[size];"
+		"ksvremrf %[rd], %[rs1], %[rs2];"
+		://no output register
+		:[size] "r" (size), [rd] "r" (rd), [rs1] "r" (rs1), [rs2] "r" (rs2)
+		:/*no clobbered registers*/
+	);
+	
+	return 1;
+}
+
+__attribute__ ((always_inline)) inline  int ksvremsc(void* rd, void* rs1, void* rs2)
+{
+	__asm__(
+		"ksvremsc %[rd], %[rs1], %[rs2];"
+		://no output register
+		:[rd] "r" (rd), [rs1] "r" (rs1), [rs2] "r" (rs2)
+		:/*no clobbered registers*/
+	);
+	
+	return sizeof(rd);
+}
+
+__attribute__ ((always_inline)) inline int ksvremsc_v2(void* rd, void* rs1, void* rs2, int size)
+{
+	__asm__(
+        "csrw 0xBF0, %[size];"
+		"ksvremsc %[rd], %[rs1], %[rs2];"
+		://no output register
+		:[size] "r" (size), [rd] "r" (rd), [rs1] "r" (rs1), [rs2] "r" (rs2)
+		:/*no clobbered registers*/
+	);
+	
+	return 1;
+}
 /*
 The three functions below perfrom full dot product using multi-threading
 thread 1 loads vector 1 (of size int size) from main memory into spmA and exits
