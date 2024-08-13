@@ -58,7 +58,8 @@ __attribute__ ((always_inline)) inline void Klessydra_perf_cnt_start()
 		"csrrw zero, 0xB08, zero;"     // reset unconditional count
 		"csrrw zero, 0xB09, zero;"     // reset branch count
 		"csrrw zero, 0xB0A, zero;"     // reset taken branch count
-		"li %[enable], 0x000003E7;"    // enable performance counters
+		"csrrw zero, 0xB16, zero;"     // reset branch hit count
+		"li %[enable], 0x002003E7;"    // enable performance counters
 		"csrrw zero, 0x7A0, %[enable]" // enable performance counters
 		:
 		:[enable] "r" (enable_perf_cnt)
@@ -70,7 +71,7 @@ __attribute__ ((always_inline)) inline void Klessydra_perf_cnt_start()
 
 __attribute__ ((always_inline)) inline int* Klessydra_perf_cnt_finish() {	
 
-	int perf[8] = {0};   // no need to make the array and its pointer static, as they are declared in an inline function 
+	int perf[9] = {0};   // no need to make the array and its pointer static, as they are declared in an inline function 
 	int* ptr_perf = &perf[0];
 
 	__asm__("csrrw zero, 0x7A0, 0x00000000;" // disable performance counters
@@ -90,6 +91,8 @@ __attribute__ ((always_inline)) inline int* Klessydra_perf_cnt_finish() {
 		"sw %[perf6], 24(%[ptr_perf]);"
 		"csrrw %[perf7], 0xB0A, zero;"
 		"sw %[perf7], 28(%[ptr_perf]);"
+		"csrrw %[perf8], 0xB16, zero;"
+		"sw %[perf8], 32(%[ptr_perf]);"
 		:
 		:[perf0] "r" (perf[0]),
 		 [perf1] "r" (perf[1]),
@@ -99,6 +102,7 @@ __attribute__ ((always_inline)) inline int* Klessydra_perf_cnt_finish() {
 		 [perf5] "r" (perf[5]),
 		 [perf6] "r" (perf[6]),
 		 [perf7] "r" (perf[7]),
+		 [perf8] "r" (perf[8]),
 		 [ptr_perf] "r" (ptr_perf)
 		:"memory"
 	);
