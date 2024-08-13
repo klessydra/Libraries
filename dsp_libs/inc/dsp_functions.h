@@ -4,7 +4,7 @@
 #define MHARTID_IDCORE_MASK 15
 
 #ifndef THREAD_POOL_SIZE
-	#define THREAD_POOL_SIZE 4
+	#define THREAD_POOL_SIZE 3
 #endif
 
 /*
@@ -651,7 +651,25 @@ thread 2 loads vector 2 (of size int size) from main memory into spmB and exits
 thread 3 does vector addition between vect1 and vect2
 thread 3 then stores the value back in the main memory at the address in "result"
 */
-void* kless_vector_multiplication(void *result, void* src1, void* src2, int size);
+
+void kaddv_complete(void *result, void* src1, void* src2, int size);
+void kaddv_sw_loop_complete(void *result, void* src1, void* src2, int size, int SIMD_BYTES);
+
+void ksubv_complete(void *result, void* src1, void* src2, int size);
+void ksubv_sw_loop_complete(void *result, void* src1, void* src2, int size, int SIMD_BYTES);
+
+void kvmul_complete(void *result, void* src1, void* src2, int size);
+void kvmul_sw_loop_complete(void *result, void* src1, void* src2, int size, int SIMD_BYTES);
+
+void ksrlv_complete(void *result, void* src1, void* src2, int size);
+void ksrlv_sw_loop_complete(void *result, void* src1, void* src2, int size, int SIMD_BYTES);
+
+void ksrav_complete(void *result, void* src1, void* src2, int size);
+void ksrav_sw_loop_complete(void *result, void* src1, void* src2, int size, int SIMD_BYTES);
+
+void kdotp_complete(void *result, void* src1, void* src2, int size);
+void kdotp_sw_loop_complete(void *result, void* src1, void* src2, int size, int SIMD_BYTES);
+
 
 /*
 The three functions below perfrom full dot product including post scaling between
