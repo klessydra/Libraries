@@ -18,6 +18,7 @@ void sync_barrier_reset()
 
 void sync_barrier_thread_registration()
 {
+	__asm__("csrw 0x300, 0x8;" ); // each thread enables it's own interrupt
 	int my_hart;
 	my_hart = Klessydra_get_coreID();
 	arrived_at_barrier[my_hart] =  0;	
