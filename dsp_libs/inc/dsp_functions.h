@@ -785,14 +785,54 @@ void ksubv_sw_loop_complete(void *result, void* src1, void* src2, int size, int 
 void kvmul_complete(void *result, void* src1, void* src2, int size);
 void kvmul_sw_loop_complete(void *result, void* src1, void* src2, int size, int SIMD_BYTES);
 
+void kvdiv_complete(void *result, void* src1, void* src2, int size);
+void kvdiv_sw_loop_complete(void *result, void* src1, void* src2, int size, int SIMD_BYTES);
+
+void kvslt_complete(void *result, void* src1, void* src2, int size);
+void kvslt_sw_loop_complete(void *result, void* src1, void* src2, int size, int SIMD_BYTES);
+
+void krelu_complete(void *result, void* src1, void* src2, int size);
+void krelu_sw_loop_complete(void *result, void* src1, void* src2, int size, int SIMD_BYTES);
+
 void ksrlv_complete(void *result, void* src1, void* src2, int size);
 void ksrlv_sw_loop_complete(void *result, void* src1, void* src2, int size, int SIMD_BYTES);
 
 void ksrav_complete(void *result, void* src1, void* src2, int size);
 void ksrav_sw_loop_complete(void *result, void* src1, void* src2, int size, int SIMD_BYTES);
 
+void ksvaddsc_complete(void *result, void* src1, void* src2, int size);
+void ksvaddsc_sw_loop_complete(void *result, void* src1, void* src2, int size, int SIMD_BYTES);
+
+void ksvaddrf_complete(void *result, void* src1, void* src2, int size);
+void ksvaddrf_sw_loop_complete(void *result, void* src1, void* src2, int size, int SIMD_BYTES);
+
+void ksvmulsc_complete(void *result, void* src1, void* src2, int size);
+void ksvmulsc_sw_loop_complete(void *result, void* src1, void* src2, int size, int SIMD_BYTES);
+
+void ksvmulrf_complete(void *result, void* src1, void* src2, int size);
+void ksvmulrf_sw_loop_complete(void *result, void* src1, void* src2, int size, int SIMD_BYTES);
+
+void ksvdivsc_complete(void *result, void* src1, void* src2, int size);
+void ksvdivsc_sw_loop_complete(void *result, void* src1, void* src2, int size, int SIMD_BYTES);
+
+void ksvdivrf_complete(void *result, void* src1, void* src2, int size);
+void ksvdivrf_sw_loop_complete(void *result, void* src1, void* src2, int size, int SIMD_BYTES);
+
+void ksvremsc_complete(void *result, void* src1, void* src2, int size);
+void ksvremsc_sw_loop_complete(void *result, void* src1, void* src2, int size, int SIMD_BYTES);
+
+void ksvremrf_complete(void *result, void* src1, void* src2, int size);
+void ksvremrf_sw_loop_complete(void *result, void* src1, void* src2, int size, int SIMD_BYTES);
+
+void ksvslt_complete(void *result, void* src1, void* src2, int size);
+void ksvslt_sw_loop_complete(void *result, void* src1, void* src2, int size, int SIMD_BYTES);
+
+// SW loop implementations of these functions are not made either because of their complexity or irrelevance
+void kvred_complete(void *result, void* src1, void* src2, int size);
+
 void kdotp_complete(void *result, void* src1, void* src2, int size);
-void kdotp_sw_loop_complete(void *result, void* src1, void* src2, int size, int SIMD_BYTES);
+
+void kdotpps_complete(void *result, void* src1, void* src2, int size);
 
 
 /*
