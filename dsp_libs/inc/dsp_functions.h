@@ -38,10 +38,6 @@ If the user changes the starting address of the scratchpads in the rtl, he must 
 #define spmaddrD 0x10003000  // Default startung address of SPMD
 #endif
 
-/*
-
-*/
-
 #ifndef __KLESSYDRACFUNCTIONS_H__
 #define __KLESSYDRACFUNCTIONS_H__
 
@@ -747,34 +743,6 @@ __attribute__ ((always_inline)) inline int ksvremsc_v2(void* rd, void* rs1, void
 	
 	return 1;
 }
-/*
-The three functions below perfrom full dot product using multi-threading
-thread 1 loads vector 1 (of size int size) from main memory into spmA and exits
-thread 2 loads vector 2 (of size int size) from main memory into spmB and exits
-thread 3 does dot product between vect1 and vect2
-thread 3 then stores the value back in the main memory at the address in "result"
-*/
-void* kless_dot_product(void* result, void* src1, void* src2, int size);
-/*
-The three functions below perfrom full vector addition using multi-threading
-thread 1 loads vector 1 (of size int size) from main memory into spmA and exits
-thread 2 loads vector 2 (of size int size) from main memory into spmB and exits
-thread 3 does vector addition between vect1 and vect2
-thread 3 then stores the value back in the main memory at the address in "result"
-*/
-
-void* kless_vector_addition_sth(void* result, void* src1, void* src2, int size);
-
-void* kless_vector_addition_mth(void* result, void* src1, void* src2, int size);
-
-void* kless_vector_addition_sth_sw_loop(void* result, void* src1, void* src2, int size, int SIMD_BYTES);
-/*
-The three functions below perfrom multiply the corresponding vector elements in the sources by each other
-thread 1 loads vector 1 (of size int size) from main memory into spmA and exits
-thread 2 loads vector 2 (of size int size) from main memory into spmB and exits
-thread 3 does vector addition between vect1 and vect2
-thread 3 then stores the value back in the main memory at the address in "result"
-*/
 
 void kaddv_complete(void *result, void* src1, void* src2, int size);
 void kaddv_sw_loop_complete(void *result, void* src1, void* src2, int size, int SIMD_BYTES);
@@ -832,122 +800,35 @@ void kvred_complete(void *result, void* src1, void* src2, int size);
 
 void kdotp_complete(void *result, void* src1, void* src2, int size);
 
-void kdotpps_complete(void *result, void* src1, void* src2, int size);
-
-
-/*
-The three functions below perfrom full dot product including post scaling between
-the multiplication and the accumulation using multi-threading
-thread 1 loads vector 1 (of size int size) from main memory into spmA and exits
-thread 2 loads vector 2 (of size int size) from main memory into spmB and exits
-thread 3 does post scaling dot product between vect1 and vect2
-thread 3 then stores the value back in the main memory at the address in "result"
-*/
-void* kless_post_scal_dot_product(void *result, void* src1, void* src2, void* p_scal, int size);
-
-/*
-The three functions below perfrom "through emulation" full dot product including
-post scaling between the multiplication and the accumulation using multi-threading
-thread 1 loads vector 1 (of size int size) from main memory into spmA and exits
-thread 2 loads vector 2 (of size int size) from main memory into spmB and exits
-thread 3 emulates post scaling dot product between vect1 and vect2
-thread 3 then stores the value back in the main memory at the address in "result"
-*/
-void* kless_post_scal_dot_product_emul(void *result, void* src1, void* src2, void* p_scal, int size);
-
-/*
-The three functions below perfrom full vector addition using multi-threading
-thread 1 loads the vector (of size int size) from main memory into spmA and exits
-thread 2 does vector reduction by accumulatin the elements in vect1
-thread 2 then stores the value back in the main memory at the address in "result"
-*/
-void* kless_vector_reduction(void *result, void* src, int size);
-
-/*
-The three functions below perfrom full vector subtraction using multi-threading
-thread 1 loads vector 1 (of size int size) from main memory into spmA and exits
-thread 2 loads vector 2 (of size int size) from main memory into spmB and exits
-thread 3 does vector subtraction between vect1 and vect2
-thread 3 then stores the value back in the main memory at the address in "result"
-*/
-void*  kless_vector_subtraction(void* result, void* src1, void* src2, int size);
-
-
-/*
-The three functions below perfrom full right arithmetic shift using multi-threading
-thread 1 loads vector 1 (of size int size) from main memory into spmA and exits
-thread 2 does right arithmetic shift between vect1 and the shift amount in src2
-thread 2 then stores the value back in the main memory at the address in "result"
-*/
-void*  kless_vector_right_shift_arith(void* result, void* src1, void* src2, int size);
-
-/*
-The three functions below perfrom full right logic shift using multi-threading
-thread 1 loads vector 1 (of size int size) from main memory into spmA and exits
-thread 2 does right logic shift between vect1 and the shift amount in src2
-thread 2 then stores the value back in the main memory at the address in "result"
-*/
-void*  kless_vector_right_shift_logic(void* result, void* src1, void* src2, int size);
-
-/*
-The three functions below perfrom full scalar vector addition using multi-threading
-thread 1 loads vector 1 (of size int size) from main memory into spmA and exits
-thread 2 does scalar vector addition between vect1 and the scalar in src2 (src2 is not pointer)
-thread 2 then stores the value back in the main memory at the address in "result"
-*/
-void*  kless_scalar_vect_add_rf(void* result, void* src1, void* src2, int size);
-
-/*
-The three functions below perfrom full scalar vector addition using multi-threading
-thread 1 loads vector 1 (of size int size) from main memory into spmA and exits
-thread 2 loads scalar 1 from main memory into spmB and exits
-thread 3 does scalar vector addition between vect1 and the scalar in src2
-thread 3 then stores the value back in the main memory at the address in "result"
-*/
-void*  kless_scalar_vect_add_sc(void* result, void* src1, void* src2, int size);
-/*
-The three functions below perfrom full scalar vector multiplication using multi-threading
-thread 1 loads vector 1 (of size int size) from main memory into spmA and exits
-thread 2 does scalar vector multiplication between vect1 and the scalar in src2 (src2 is not a pointer)
-thread 2 then stores the value back in the main memory at the address in "result"
-*/
-void*  kless_scalar_vect_mult_rf(void* result, void* src1, void* src2, int size);
-
-/*
-The three functions below perfrom full scalar vector multiplication using multi-threading
-thread 1 loads vector 1 (of size int size) from main memory into spmA and exits
-thread 2 loads scalar 1 from main memory into spmB and exits
-thread 3 does scalar vector multiplication between vect1 and the scalar in src2
-thread 3 then stores the value back in the main memory at the address in "result"
-*/
-void*  kless_scalar_vect_mult_sc(void* result, void* src1, void* src2, int size);
-
-/*
-The three functions below perfrom full vector rectification using multi-threading
-thread 1 loads vector 1 (of size int size) from main memory into spmA and exits
-thread 2 does vector rectification of vect1
-thread 2 then stores the value back in the main memory at the address in "result"
-*/
-void*  kless_rectify_linear_unit(void* result, void* src1, int size);
-
-void*  kless_vector_set_less_than(void* result, void* src1, void* src2, int size);
-
-void*  kless_scalar_vect_set_less_than(void* result, void* src1, void* src2, int size);
-/*
-The three functions below perfrom vector broadcast
-there are no vector loads in this function
-thread 1 does vector broadcast of the "src" (src is a scalar and not a pointer) into "dest
-thread 1 then stores the value of "dest" back in the main memory at the address in "result"
-*/
-void*  kless_scalar_broadcast(void *result, void *dest, void* src, int size);
-
-/*
-TThe function below is for debugging purposes and might not serve useful to the user, use
-instead the function called "kvcp" or "kvcp_v2" to od vector copies
-it laods a vector from main mem into spmA,
-the vector spmA is copied into spmB. and the resut is stored back in the main memory
-at the index in "result
-*/
-void* kless_vector_copy(void* result, void* src1, int size);
+void* kdotpps_complete(void *result, void* src1, void* src2, void* p_scal, int size);
 
 #endif
+
+
+#ifndef A_ORDER
+#define A_ORDER 16 //Matrix size, don't do 2x2 case, for that there is another test
+#endif
+#ifndef B_ORDER
+#define B_ORDER 3
+#endif
+#define Z_OVERHEAD B_ORDER-1 // total zeropadded overhead from both side of a row or a column
+#define Z_ORDER (A_ORDER+Z_OVERHEAD)
+#define Z_OFFSET Z_OVERHEAD>>1 // the data offset from the beginning of a line
+
+#ifndef SIZE_OF_INT
+#define SIZE_OF_INT 4
+#endif
+
+void matrix_check( int* mat1, int* mat2, int size );
+void matrix_print(int* pt, int size, int mode, int start_row, int finish_row);
+
+void conv2D(int fm_size, int krn_size, int (*matrix)[], int (*kernel)[], int (*out)[]);
+
+// loop unrolled convolution function for kernels sizes from 3x3 to 11x11
+void conv2D_3x3(int fm_size, int (*matrix)[], int (*kernel)[3], int (*out)[]);
+void conv2D_5x5(int fm_size, int (*matrix)[], int (*kernel)[5], int (*out)[]);
+void conv2D_7x7(int fm_size, int (*matrix)[], int (*kernel)[7], int (*out)[]);
+void conv2D_9x9(int fm_size, int (*matrix)[], int (*kernel)[9], int (*out)[]);
+void conv2D_11x11(int fm_size, int (*matrix)[], int (*kernel)[11], int (*out)[]);
+
+void conv2D_accl(int fm_size, int krn_size, void* spm_fm, void* spm_krn, void* spm_res);

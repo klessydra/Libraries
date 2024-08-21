@@ -1,6 +1,7 @@
 add_definitions(${KLESS_DEFINES})
 
 set(SOURCES
+    src/convolution.c
     src/kvcu_complete.c
     )
 
