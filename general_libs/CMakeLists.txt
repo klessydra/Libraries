@@ -15,6 +15,7 @@ set(SOURCES
     src/send_multi_sw_irq.c
     src/send_sw_irq.c
     src/sync_barrier.c
+    src/klessydra_exception_handler.c
     )
 
 set(HEADERS
@@ -23,6 +24,7 @@ set(HEADERS
     inc/riscv_test.h
     inc/test_macros.h
     inc/encoding.h
+    inc/klessydra_exception_handler.h
     )
 
 include_directories(inc/)

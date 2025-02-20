@@ -4,6 +4,7 @@
 #undef  RVTEST_RV64U
 #define RVTEST_RV64U RVTEST_RV32M
 
+#define INSTR_ACCESS_FAULT_CODE           0x00000001;
 #define ILLEGAL_INSN_EXCEPT_CODE		  0x00000002;
 #define LOAD_ERROR_EXCEPT_CODE 			  0x00000005;
 #define STORE_ERROR_EXCEPT_CODE 		  0x00000007;
@@ -22,6 +23,7 @@
 #define READ_SAME_SCARTCHPAD_EXCEPT_CODE  0x00000104;
 #define WRITE_ACCESS_EXCEPT_CODE          0x00000105;
 #define CTX_SWITCH_CODE                   0x00000110;
+
 
 #define k_mstatus 	0x300
 #define k_mepc 		0x341
